@@ -1,0 +1,63 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nyatet_barang_app
+    ports:
+      - "8001:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - nyatet_barang_network
+
+  db:
+    image: mariadb:10.11
+    container_name: nyatet_barang_db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: nyatet_barang
+      MARIADB_USER: nyatet_user
+      MARIADB_PASSWORD: nyatet_password
+      MARIADB_ROOT_PASSWORD: root_password
+    # ports:
+    #   - "3306:3306"
+    volumes:
+      - nyatet_barang_db_data:/var/lib/mysql
+    networks:
+      - nyatet_barang_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: nyatet_barang_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    depends_on:
+      - db
+    networks:
+      - nyatet_barang_network
+
+  node:
+    image: node:20-alpine
+    container_name: nyatet_barang_node
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    networks:
+      - nyatet_barang_network
+
+volumes:
+  nyatet_barang_db_data:
+
+networks:
+  nyatet_barang_network:
+    driver: bridge
