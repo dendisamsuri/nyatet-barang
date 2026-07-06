@@ -42,11 +42,11 @@ class DashboardController extends Controller
 
         $topServiceDetails = $this->topServiceDetails($userId, $itemIds, $startDate, $endDate);
         $topServiceCosts = $this->topServiceCosts($userId, $itemIds, $startDate, $endDate);
-        $comparison = [
+        $comparison = collect([
             ['category' => 'Servis', 'amount' => (float) $totalServiceCost],
             ['category' => 'Bensin', 'amount' => (float) $totalFuelCost],
             ['category' => 'Listrik', 'amount' => (float) $totalElectricityCost],
-        ];
+        ]);
         $distancePerDate = $this->distancePerDate($userId, $itemIds, $startDate, $endDate);
         $kwhPerDate = $this->kwhPerDate($userId, $itemIds, $startDate, $endDate);
 
