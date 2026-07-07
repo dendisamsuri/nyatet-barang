@@ -59,6 +59,11 @@
                 </aside>
 
                 <main class="flex-1 p-6">
+                    @if (isset($header))
+                        <div class="mb-6">
+                            {{ $header }}
+                        </div>
+                    @endif
                     @if (session('success'))
                         <div class="mb-4 px-4 py-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
                             {{ session('success') }}

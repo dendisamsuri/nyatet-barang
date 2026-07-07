@@ -20,6 +20,7 @@
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Nominal</th>
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Sesudah</th>
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Estimasi kWh</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Catatan</th>
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Aksi</th>
                         </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <td class="px-6 py-4 text-right">Rp{{ number_format($log->amount, 0, ',', '.') }}</td>
                             <td class="px-6 py-4 text-right">{{ number_format($log->after_kwh, 1, ',', '.') }}</td>
                             <td class="px-6 py-4 text-right">{{ number_format($log->added_kwh, 1, ',', '.') }} kWh</td>
+                            <td class="px-6 py-4 text-gray-500">{{ $log->notes ?? '-' }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('electricity-logs.edit', $log) }}" class="text-indigo-600 hover:text-indigo-900 mr-2">Edit</a>
                                 <form action="{{ route('electricity-logs.destroy', $log) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus?')">
