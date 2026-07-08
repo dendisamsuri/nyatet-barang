@@ -16,6 +16,53 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('/manifest.json', function () {
+    $favicon = \App\Models\Setting::getValue('site_favicon');
+
+    if ($favicon) {
+        $url = \Illuminate\Support\Facades\Storage::url($favicon);
+        $icons = [
+            [
+                'src' => $url,
+                'sizes' => 'any',
+                'type' => 'image/png',
+                'purpose' => 'any maskable',
+            ],
+        ];
+    } else {
+        $icons = [
+            [
+                'src' => '/app-icons/icon-192.svg',
+                'sizes' => '192x192',
+                'type' => 'image/svg+xml',
+            ],
+            [
+                'src' => '/app-icons/icon-512.svg',
+                'sizes' => '512x512',
+                'type' => 'image/svg+xml',
+                'purpose' => 'any',
+            ],
+            [
+                'src' => '/app-icons/icon-512.svg',
+                'sizes' => '512x512',
+                'type' => 'image/svg+xml',
+                'purpose' => 'maskable',
+            ],
+        ];
+    }
+
+    return response()->json([
+        'name' => config('app.name', 'Nyatet Barang'),
+        'short_name' => 'Nyatet',
+        'description' => 'Aplikasi pencatatan barang, servis, dan pengeluaran kendaraan',
+        'start_url' => '/',
+        'display' => 'standalone',
+        'background_color' => '#f3f4f6',
+        'theme_color' => '#4f46e5',
+        'icons' => $icons,
+    ]);
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
