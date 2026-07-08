@@ -1,12 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="96" fill="#4f46e5"/>
-  <g transform="translate(96, 96)">
-    <rect x="20" y="20" width="280" height="200" rx="20" fill="white" opacity="0.95"/>
-    <rect x="20" y="20" width="280" height="40" rx="20" fill="#e0e7ff"/>
-    <line x1="80" y1="95" x2="240" y2="95" stroke="#6366f1" stroke-width="6" stroke-linecap="round"/>
-    <line x1="80" y1="125" x2="216" y2="125" stroke="#6366f1" stroke-width="6" stroke-linecap="round"/>
-    <line x1="80" y1="155" x2="192" y2="155" stroke="#6366f1" stroke-width="6" stroke-linecap="round"/>
-  </g>
-  <circle cx="384" cy="384" r="64" fill="#22c55e"/>
-  <path d="M360 384l16 16 32-32" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
