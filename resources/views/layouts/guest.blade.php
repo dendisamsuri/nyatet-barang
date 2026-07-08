@@ -4,8 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="theme-color" content="#4f46e5">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+
+        @php
+            $favicon = \App\Models\Setting::getValue('site_favicon');
+        @endphp
+        @if ($favicon)
+            <link rel="icon" type="image/png" href="{{ \Illuminate\Support\Facades\Storage::url($favicon) }}">
+        @else
+            <link rel="icon" href="{{ asset('favicon.ico') }}">
+        @endif
+
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

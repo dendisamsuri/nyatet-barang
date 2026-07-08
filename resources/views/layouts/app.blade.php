@@ -4,8 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="theme-color" content="#4f46e5">
 
         <title>{{ config('app.name', 'Nyatet Barang') }}</title>
+
+        @php
+            $favicon = \App\Models\Setting::getValue('site_favicon');
+        @endphp
+        @if ($favicon)
+            <link rel="icon" type="image/png" href="{{ \Illuminate\Support\Facades\Storage::url($favicon) }}">
+        @else
+            <link rel="icon" href="{{ asset('favicon.ico') }}">
+        @endif
+
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -52,7 +64,7 @@
                             <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Pengaturan</p>
                             <a href="{{ route('settings.edit') }}" class="flex items-center gap-2 px-3 py-2 mt-2 text-sm font-medium rounded-md {{ request()->routeIs('settings.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                Logo
+                                Tampilan
                             </a>
                             <a href="{{ route('fuel-types.index') }}" class="flex items-center gap-2 px-3 py-2 mt-2 text-sm font-medium rounded-md {{ request()->routeIs('fuel-types.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
